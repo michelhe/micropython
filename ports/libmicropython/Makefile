@@ -13,6 +13,8 @@ include $(TOP)/py/py.mk
 # Force a full QSTR rebuild if mpconfigembed.h changes.
 $(HEADER_BUILD)/qstrdefs.generated.h: $(MICROPY_MPCONFIGEMBED_H)
 
+$(BUILD)/libmicropython.a : $(MICROPY_MPCONFIGEMBED_H)
+
 INC += -I.
 INC += -I..
 INC += -I$(TOP)
