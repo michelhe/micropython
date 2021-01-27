@@ -57,6 +57,7 @@ OBJ = $(PY_O)
 OBJ += $(addprefix $(BUILD)/, $(SRC_C:.c=.o))
 OBJ += $(addprefix $(BUILD)/, $(SRC_CXX:.cpp=.o))
 OBJ += $(addprefix $(BUILD)/, $(LIB_SRC_C:.c=.o))
+OBJ += $(addprefix $(BUILD)/, $(EXTMOD_SRC_C:.c=.o))
 
 HASCPP17 = $(shell expr `$(CC) -dumpversion | cut -f1 -d.` \>= 7)
 ifeq ($(HASCPP17), 1)
@@ -73,11 +74,11 @@ SRC_QSTR += $(SRC_C) $(SRC_CXX) $(LIB_SRC_C) $(EXTMOD_SRC_C)
 # SRC_QSTR
 SRC_QSTR_AUTO_DEPS +=
 
-include $(TOP)/py/mkrules.mk
-
 CLEAN_EXTRA += $(LIBMICROPYTHON)
 
 # Allow embedder to specify an mpconfigembed.h.
 ifneq ($(MICROPY_MPCONFIGEMBED_H),)
 CFLAGS += -DMICROPY_MPCONFIGEMBED_H='<$(MICROPY_MPCONFIGEMBED_H)>'
 endif
+
+include $(TOP)/py/mkrules.mk
